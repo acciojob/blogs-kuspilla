@@ -6,16 +6,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
 @Entity
-@Table
-public class Blog{
+@Table(name="Blog")
+public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int blogId;
     private String title;
     private String content;
-
     @CreationTimestamp
     private Date publicationDate;
 
@@ -23,34 +21,34 @@ public class Blog{
     @JoinColumn
     private User user;
 
-    @OneToMany(mappedBy = "Blog", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
     @JoinColumn
     private List<Image> imageList;
 
-    public Blog(){
-
+    public Blog() {
     }
-    public Blog(Integer id, String title, String content, Date date,User user, List<Image> imageList){
-        this.id = id;
+
+    public Blog(User user, String title, String content) {
         this.title = title;
         this.content = content;
-        this.publicationDate =date;
+        this.user = user;
+    }
+    public Blog(int blogId, String title, String content, Date publicationDate, User user, List<Image> imageList) {
+        this.blogId = blogId;
+        this.title = title;
+        this.content = content;
+        this.publicationDate = publicationDate;
+        this.user = user;
         this.imageList = imageList;
-        this.user = user;
     }
 
-    public Blog(User user,String title,String content){
-        this.user = user;
-        this.title = title;
-        this.content = content;
+    public int getId() {
+        return blogId;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(int blogId) {
+        this.blogId = blogId;
     }
 
     public String getTitle() {
@@ -69,11 +67,11 @@ public class Blog{
         this.content = content;
     }
 
-    public Date getPublicationDate() {
+    public Date getPubDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPubDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 

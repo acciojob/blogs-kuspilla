@@ -17,7 +17,7 @@ public class UserService {
     public User createUser(String username, String password){
         User user = new User();
         user.setPassword(password);
-        user.setUserId(username);
+        user.setUsername(username);
         userRepository3.save(user);
         return user;
     }
@@ -30,11 +30,9 @@ public class UserService {
      userRepository3.deleteById(userId);
     }
 
-    public User updateUser(Integer id, String password)throws Exception{
+    public User updateUser(Integer id, String password){
         Optional<User> userOptional = userRepository3.findById(id);
-        if( userOptional.isPresent()== false){
-            throw new Exception("Id is invalid");
-        }
+
         User user = userOptional.get();
         user.setPassword(password);
         userRepository3.save(user);

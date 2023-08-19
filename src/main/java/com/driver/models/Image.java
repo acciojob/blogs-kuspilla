@@ -17,25 +17,28 @@ public class Image{
     @JoinColumn
     private Blog blog;
 
+
     public Image(){
 
     }
-    public Image(Blog blog, String description,String dimensions){
-        this.blog = blog;
-        this.dimensions = dimensions;
+    public Image(Blog blog, String description, String dimensions) {
         this.description = description;
+        this.dimensions = dimensions;
+        this.blog = blog;
     }
-    public Image(int  imageId, String description,String dimensions, Blog blog){
+
+    public Image(int imageId, String description, String dimensions, Blog blog) {
         this.imageId = imageId;
-        this.dimensions = dimensions;
         this.description = description;
+        this.dimensions = dimensions;
         this.blog = blog;
     }
-    public int getImageId() {
+
+    public int getId() {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public void setId(int imageId) {
         this.imageId = imageId;
     }
 
@@ -53,5 +56,13 @@ public class Image{
 
     public void setDimensions(String dimensions) {
         this.dimensions = dimensions;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 }

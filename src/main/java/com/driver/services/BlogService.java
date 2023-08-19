@@ -27,20 +27,17 @@ public class BlogService {
 
         Blog blog = new Blog(user,title,content);
 
-        blog.setPublicationDate(new Date());
+        blog.setPubDate(new Date());
         userRepository1.save(user);
         user.getBlogList().add(blog);
         return blog;
 
     }
 
-    public void deleteBlog(int blogId)throws Exception{
+    public void deleteBlog(int blogId){
         //delete blog and corresponding images
 
-        Optional<Blog> optionalBlog = blogRepository.findById(blogId);
-        if(optionalBlog.isPresent() == false){
-            throw new Exception("Id is invalid");
-        }
+
         blogRepository.deleteById(blogId);
     }
 }

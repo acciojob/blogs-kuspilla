@@ -2,52 +2,54 @@ package com.driver.models;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
-
 @Entity
-@Table
-public class User {
+@Table(name="user")
+public class User{
+
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private int id;
-     private String userId;
+     private int userId;
+     private String username;
      private String password;
-     private String firstName = "test";
-     private String lastName = "test";
+     private String firstName="test";
+     private String lastName="test";
 
-     @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
+     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
      @JoinColumn
-     private List<Blog> blogList = new ArrayList<>();
+     private List<Blog> blogList;
 
      public User() {
      }
 
-     User(String userId, String password){
-          this.userId = userId;
+     public User(String username, String password) {
+          this.username = username;
           this.password = password;
      }
-     User(String userId, String password,String firstName, String lastName){
+
+     public User(int userId, String username, String password, String firstName, String lastName, List<Blog> blogList) {
           this.userId = userId;
+          this.username = username;
           this.password = password;
           this.firstName = firstName;
           this.lastName = lastName;
+          this.blogList = blogList;
      }
 
      public int getId() {
-          return id;
-     }
-
-     public void setId(int id) {
-          this.id = id;
-     }
-
-     public String getUserId() {
           return userId;
      }
 
-     public void setUserId(String userId) {
+     public void setId(int userId) {
           this.userId = userId;
+     }
+
+     public String getUsername() {
+          return username;
+     }
+
+     public void setUsername(String username) {
+          this.username = username;
      }
 
      public String getPassword() {

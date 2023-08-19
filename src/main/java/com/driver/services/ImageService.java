@@ -27,23 +27,15 @@ public class ImageService {
 
     }
 
-    public void deleteImage(Integer id) throws Exception{
-
-        Optional<Image> optionalImage = imageRepository2.findById(id);
-        if(!optionalImage.isPresent()){
-            throw new Exception("Id not valid");
-        }
+    public void deleteImage(Integer id) {
         imageRepository2.deleteById(id);
     }
 
-    public int countImagesInScreen(Integer id, String screenDimensions) throws Exception{
+    public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
 
-        Optional<Image> optionalImage = imageRepository2.findById(id);
-        if(!optionalImage.isPresent()) {
-            throw new Exception("Id is invalid");
-        }
-        Image image =optionalImage.get();
+
+        Image image =imageRepository2.findById(id).get();
         String imageDirection = image.getDimensions();
         String[] imagerr = imageDirection.split("x");
         String[] imagescreen = screenDimensions.split("x");
